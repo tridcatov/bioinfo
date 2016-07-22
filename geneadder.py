@@ -8,11 +8,17 @@ dict = {}
 totalCount = 0
 
 for line in open(input, 'r'):
-	[_, gene, count] = line.split()
-	if ( not count.isdigit() ):
-		continue
+	[_, gene, count] = line.split("\t")
+
+	if ( not count.isdigit()):
+		try:
+			count = float(count)
+		except:
+			print("Not a float, possible header")
+			continue
+	else:
+		count = int(count)
 	
-	count = int(count)
 	totalCount += count
 	if ( gene in dict ):
 		dict[gene] += count
