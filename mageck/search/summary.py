@@ -35,12 +35,13 @@ for f in files:
                 cache[gene] = []
 
             pvalue = float(row[9])
-            rank = float(row[11])
+            rank = int(row[11])
             cache[gene].append((file, rank, pvalue))
             count += 1
 			
         print('Loaded ' + str(count) + ' genes')
 		
+print('Load complete, input full gene name to search database')
 for gene in sys.stdin:
     gene = gene.strip()
     if not gene in cache:
@@ -49,4 +50,4 @@ for gene in sys.stdin:
 
     for info in cache[gene]:
         file, rank, pvalue = info
-        print("Rank {} with pvalue {} in sample {}".format(rank, pvalue, fc[file]))
+        print("Rank {:d} with pvalue {} in sample {}".format(rank, pvalue, fc[file]))
